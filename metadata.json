@@ -1,0 +1,7 @@
+{
+  "name": "Jiaguwen Journey",
+  "description": "An interactive Chinese character learning application focusing on Oracle Bone Script (Jiaguwen) with tracing, history, and analytics.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
