@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavProps, View } from '../types';
 import { Icons } from '../components/Icons';
-import tracingSample from '../assets/images/tracing_sample.jpg';
 
 import { uploadComparison } from '../api/client';
 
@@ -48,7 +47,7 @@ const TracingScreen: React.FC<NavProps> = ({ onChangeView }) => {
                 {/* Reference Card */}
                 <section className="bg-white rounded-2xl shadow-sm p-6 flex flex-col items-center justify-center text-center">
                     <div className="w-24 h-24 flex items-center justify-center mb-4">
-                        <img src={tracingSample} alt="Oracle Bird" className="w-full h-full object-contain" />
+                        <img src="https://photos.app.goo.gl/fi43bdLENqxgNjQA7" alt="Oracle Bird" className="w-full h-full object-contain" />
                     </div>
                     <h2 className="text-2xl font-bold text-gray-900">鸟 niǎo</h2>
                     <p className="text-lg font-medium text-gray-500">Bird</p>
@@ -103,7 +102,7 @@ const TracingScreen: React.FC<NavProps> = ({ onChangeView }) => {
 
                         {/* Oracle Bone Char Overlay (The goal) */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-80 mix-blend-multiply">
-                            <img src={tracingSample} alt="Trace" className="w-3/4 h-3/4 object-contain" />
+                            <img src="https://photos.app.goo.gl/fi43bdLENqxgNjQA7" alt="Trace" className="w-3/4 h-3/4 object-contain" />
                         </div>
                     </div>
                 </section>
