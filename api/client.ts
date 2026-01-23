@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
 import axios from 'axios';
 
-//const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
-const API_URL = import.meta.env.VITE_API_URL || 'https://bfswgeycyeyplpwaujee.supabase.co/api/v1';
+// Use environment variable or fallback to relative path which vercel.json rewrites to backend
+const API_URL = import.meta.env.VITE_API_URL || '/api/v1';
 console.log("Using API URL:", API_URL);
 
 const apiClient = axios.create({

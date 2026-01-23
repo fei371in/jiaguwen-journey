@@ -9,6 +9,9 @@ app = FastAPI(title=settings.PROJECT_NAME)
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://jiaguwen-journey.vercel.app",
+    "https://jiaguwen-journey-git-main-fei371ins-projects.vercel.app",
+    "https://jiaguwen-journey-fei371ins-projects.vercel.app",
 ]
 
 app.add_middleware(
