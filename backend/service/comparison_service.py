@@ -1,33 +1,47 @@
-import cv2
+from PIL import Image
 import numpy as np
-from skimage.metrics import structural_similarity as ssim
+import io
 
 class ComparisonService:
     def compare_images(self, image_bytes_a: bytes, image_bytes_b: bytes) -> float:
         """
-        Compare two images and return a similarity score between 0 and 100.
+        Compare two images using PIllow/Numpy and return a similarity score (0-100).
+        Uses simple pixel-wise difference on thresholded images.
         """
-        # Decode images
-        nparr_a = np.frombuffer(image_bytes_a, np.uint8)
-        img_a = cv2.imdecode(nparr_a, cv2.IMREAD_GRAYSCALE)
-        
-        nparr_b = np.frombuffer(image_bytes_b, np.uint8)
-        img_b = cv2.imdecode(nparr_b, cv2.IMREAD_GRAYSCALE)
-        
-        if img_a is None or img_b is None:
-            raise ValueError("Could not decode one or both images")
-
-        # Resize to fixed size for consistent comparison (e.g., 300x300)
-        target_size = (300, 300)
-        img_a = cv2.resize(img_a, target_size)
-        img_b = cv2.resize(img_b, target_size)
-
-        # Apply simple thresholding to emphasize structure (optional but often good for sketches)
-        _, img_a = cv2.threshold(img_a, 127, 255, cv2.THRESH_BINARY)
-        _, img_b = cv2.threshold(img_b, 127, 255, cv2.THRESH_BINARY)
-
-        # Calculate SSIM
-        score, _ = ssim(img_a, img_b, full=True)
-        
-        # Convert to percentage
-        return max(0.0, min(100.0, score * 100))
+        try:
+            # Load images
+            img_a = Image.open(io.BytesIO(image_bytes_a)).convert('L')
+            img_b = Image.open(io.BytesIO(image_bytes_b)).convert('L')
+            
+            # Resize - keep it small for speed and low memory
+            target_size = (200, 200)
+            img_a = img_a.resize(target_size)
+            img_b = img_b.resize(target_size)
+            
+            # Convert to numpy arrays
+            arr_a = np.array(img_a)
+            arr_b = np.array(img_b)
+            
+            # Simple thresholding (binarization) to handle "tracing" vs "solid" issues
+            # Anything darker than 128 becomes black (0), else white (255)
+            # This helps ignoring slight paper color differences
+            arr_a = np.where(arr_a < 128, 0, 255)
+            arr_b = np.where(arr_b < 128, 0, 255)
+            
+            # Calculate absolute difference
+            diff = np.abs(arr_a - arr_b)
+            
+            # Calculate mean difference (0 to 255)
+            mean_diff = np.mean(diff)
+            
+            # Normalize to 0-100 score
+            # A mean_diff of 0 means identical -> 100% match
+            # A mean_diff of 255 means opposite -> 0% match
+            score = 100.0 * (1.0 - (mean_diff / 255.0))
+            
+            return max(0.0, min(100.0, score))
+            
+        except Exception as e:
+            # Fallback or re-raise with clear message
+            print(f"Comparison error: {e}")
+            raise ValueError("Failed to process images for comparison")
