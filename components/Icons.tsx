@@ -1,24 +1,25 @@
 import React from 'react';
-import { 
-  ChevronLeft, 
-  Share, 
-  Star, 
-  MoreHorizontal, 
-  Home, 
-  BookOpen, 
-  User, 
-  Settings, 
-  Upload, 
-  RotateCcw, 
-  Trash2, 
-  Eye, 
+import {
+  ChevronLeft,
+  Share,
+  Star,
+  MoreHorizontal,
+  Home,
+  BookOpen,
+  User,
+  Settings,
+  Upload,
+  RotateCcw,
+  Trash2,
+  Eye,
   Check,
   Search,
   Cloud,
   Globe,
   Ghost,
   Map,
-  Type
+  Type,
+  Camera
 } from 'lucide-react';
 
 export const Icons = {
@@ -40,5 +41,6 @@ export const Icons = {
   Globe,
   Ghost,
   Map,
-  Type
+  Type,
+  Camera
 };

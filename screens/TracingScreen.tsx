@@ -3,7 +3,34 @@ import { NavProps, View } from '../types';
 import { Icons } from '../components/Icons';
 import tracingSample from '../assets/images/tracing_sample.jpg';
 
+import { uploadComparison } from '../api/client';
+
 const TracingScreen: React.FC<NavProps> = ({ onChangeView }) => {
+    const [comparing, setComparing] = React.useState(false);
+    const [result, setResult] = React.useState<{ similarity: number } | null>(null);
+    const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+    const handleCameraClick = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setComparing(true);
+            try {
+                // Use the original public URL for the reference image so the backend can download it
+                const originalUrl = "https://lh3.googleusercontent.com/aida-public/AB6AXuCd_DBGTmLIYTNEjlyYItIwOV9B7D4cenP51y_9XwRnQq4zZ2RhlsGn1OBwiVVzyfJB-S6uxznIZoGSWUdwTNl4PKRouQDtbuCO7W4v7gXOaCd5UFVcgdilHVCG8-PcxpQb_nsLUrLglgXxjda1wgxrjLk0uzroSHw7cL9MZJNs4gjRr86wIEK7rOuwW_uWFjgiJEf5S9RRBgDuUTWyh0hnHditeT1-H9m0R7681K5zPY0qVontSCT5u50RlFf9Fs11zuN8UfGfZYu4";
+
+                const res = await uploadComparison(e.target.files[0], originalUrl);
+                setResult(res);
+            } catch (err) {
+                console.error(err);
+                alert("Comparison failed");
+            } finally {
+                setComparing(false);
+            }
+        }
+    };
     return (
         <div className="flex-1 flex flex-col bg-[#F2F2F7] relative">
             {/* Header */}
@@ -41,12 +68,20 @@ const TracingScreen: React.FC<NavProps> = ({ onChangeView }) => {
                                 <span className="text-[10px] font-medium text-gray-400">{tool}</span>
                             </button>
                         ))}
-                        <button className="flex flex-col items-center gap-1 group">
-                            <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center group-active:bg-blue-100">
-                                <Icons.Check size={18} className="text-blue-500" />
+                        <button className="flex flex-col items-center gap-1 group" onClick={handleCameraClick}>
+                            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${comparing ? 'bg-yellow-100' : 'bg-blue-50 group-active:bg-blue-100'}`}>
+                                {comparing ? <Icons.Settings className="animate-spin text-yellow-600" size={18} /> : <Icons.Camera size={18} className="text-blue-500" />}
                             </div>
-                            <span className="text-[10px] font-bold text-blue-500">Submit</span>
+                            <span className="text-[10px] font-bold text-blue-500">{comparing ? '...' : 'Compare'}</span>
                         </button>
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            onChange={handleFileChange}
+                            className="hidden"
+                            accept="image/*"
+                            capture="environment"
+                        />
                     </nav>
 
                     {/* Canvas Grid */}
@@ -72,8 +107,28 @@ const TracingScreen: React.FC<NavProps> = ({ onChangeView }) => {
                         </div>
                     </div>
                 </section>
+
+
+                {/* Result Overlay */}
+                {result && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setResult(null)}>
+                        <div className="bg-white rounded-2xl p-6 w-full max-w-xs text-center" onClick={e => e.stopPropagation()}>
+                            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span className="text-2xl font-bold text-blue-600">{Math.round(result.similarity)}%</span>
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">Similarity Score</h3>
+                            <p className="text-gray-500 mb-6">
+                                {result.similarity > 80 ? "Excellent work! Your tracing is very accurate." :
+                                    result.similarity > 50 ? "Good effort! Keep practicing handling the curves." : "Keep trying! Focus on the stroke order."}
+                            </p>
+                            <button onClick={() => setResult(null)} className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold active:bg-blue-700">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                )}
             </main>
-        </div>
+        </div >
     );
 };
 

@@ -55,4 +55,20 @@ apiClient.interceptors.request.use(
     }
 );
 
+export const uploadComparison = async (file: File, referenceUrl: string) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('reference_url', referenceUrl);
+
+    // Note: The backend endpoint is /api/v1/characters/compare
+    // We assume the router structure. Let's verify route if needed, 
+    // but based on main.py it's /api/v1/characters/...
+    const response = await apiClient.post('/characters/compare', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+    return response.data;
+};
+
 export default apiClient;
