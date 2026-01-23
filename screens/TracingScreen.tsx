@@ -19,7 +19,7 @@ const TracingScreen: React.FC<NavProps> = ({ onChangeView }) => {
             setComparing(true);
             try {
                 // Use the original public URL for the reference image so the backend can download it
-                const originalUrl = "https://lh3.googleusercontent.com/aida-public/AB6AXuCd_DBGTmLIYTNEjlyYItIwOV9B7D4cenP51y_9XwRnQq4zZ2RhlsGn1OBwiVVzyfJB-S6uxznIZoGSWUdwTNl4PKRouQDtbuCO7W4v7gXOaCd5UFVcgdilHVCG8-PcxpQb_nsLUrLglgXxjda1wgxrjLk0uzroSHw7cL9MZJNs4gjRr86wIEK7rOuwW_uWFjgiJEf5S9RRBgDuUTWyh0hnHditeT1-H9m0R7681K5zPY0qVontSCT5u50RlFf9Fs11zuN8UfGfZYu4";
+                const originalUrl = "https://photos.app.goo.gl/fi43bdLENqxgNjQA7";
 
                 const res = await uploadComparison(e.target.files[0], originalUrl);
                 setResult(res);
