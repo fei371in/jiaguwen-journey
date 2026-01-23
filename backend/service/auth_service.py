@@ -14,11 +14,13 @@ class AuthService:
 
     def verify_password(self, plain_password, hashed_password):
         # Truncate password to 72 bytes to satisfy bcrypt limit
-        return pwd_context.verify(plain_password[:72], hashed_password)
+        plain_password_bytes = plain_password.encode('utf-8')[:72]
+        return pwd_context.verify(plain_password_bytes, hashed_password)
 
     def get_password_hash(self, password):
         # Truncate password to 72 bytes to satisfy bcrypt limit
-        return pwd_context.hash(password[:72])
+        password_bytes = password.encode('utf-8')[:72]
+        return pwd_context.hash(password_bytes)
 
     def create_access_token(self, data: dict, expires_delta: Optional[timedelta] = None):
         to_encode = data.copy()
