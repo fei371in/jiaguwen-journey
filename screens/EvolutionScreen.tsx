@@ -4,7 +4,7 @@ import { Icons } from '../components/Icons';
 
 const EvolutionScreen: React.FC<NavProps> = ({ onChangeView }) => {
   const evolutionSteps = [
-    { name: '甲骨文', sub: 'Oracle', img: 'https://photos.google.com/album/AF1QipPQ-xyHi8llCQIah0QinW7Jc7Xhv_4nwGb-nJXO/photo/AF1QipOjieNLFeyaSJehvdyCLBp4LLTRTuZJkPqj-exJ' },
+    { name: '甲骨文', sub: 'Oracle', img: 'https://photos.google.com/share/AF1QipN15_AxTJey_mf95Ssabj4JX2FjiGvdEJ5taoMu0A4NywFtFXOT_yg7EiOiELmZnA/photo/AF1QipPCR78_jRlUC_ehEISR96b-r5kS1h94QsHkoxu8?key=SC14N2ZUUnAydU9pOGJMNkVhUm9ncFlsYzdGVy13' },
     { name: '金文', sub: 'Bronze', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCKkClsQoCRsDBxQITW9pxoMArKsy5MSp0tOT3YX2qPXgPIIAZs49XOAFC2J9K5G46HduGt22hjekoPb9VkeMHsngoYjn04_eWlnl-BDQEj4E7d3jdXI4Ll9qXZFhpOY752sBZJf0gnTOeu-5FV9enYvgPzLArdGLRMW_zTCMXkHHSrf-IO_36L4dkQQP3htTciVB4B4Uv5Do3Fd_548QShtm_g2I5wLLlCMlLYrePgukqMKhNhYujKwLL4CaPH1-qMbeELewcO_5zA' },
     { name: '小篆', sub: 'Small Seal', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCVqR-TSRStTsgYAuRRI3ZxAd1wTp2hwyqcNUqdjb-GScH6GnqJVle2B5DHxQn-2VNhx3_x-Pg4jjdje22n5RSYLtHOYm9CCtsjjwg_tiCwhMZZwy5XvJZsB1N4F-caiz-yF074sJswdCiu4PeSia7tFkuluVRmtEffQGdvzkuXpLIwAQaZFFSBh-rxDrBjY9cDx0aQ0q08jIxNvPhFLpKyJmUV-uCVneMlah1YSG8RHaKyJQLO8UO9foouOUlJPrt64Hhvx9DKF-D-' },
     { name: '楷书', sub: 'Regular', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAktsc_GnB1N1lTwplDD51cUhHRpwp7Hesrd69k-rJq5qXJ9ByTXGfGwS4E9Efu97pgMfNGKouWGUTsx-cpm3Q0k3T-OLnEz3pfBBzeH8iSu2gVWk9aK9RUpMB16uvztY5yp6PV61-KGXWKVT78tTJEV_ybXYzAClg6WnJ0jNV0MROYulu0IHEvtlyQZC3Ni1NuJ69CRanVWcItYW0phbcIoxmeX09KyXhEJpQD-qnXFUF6FlRiHh_GkOWsoH-32Et3q_A6Ndj4WBlI' },

@@ -18,7 +18,7 @@ const TracingScreen: React.FC<NavProps> = ({ onChangeView }) => {
             setComparing(true);
             try {
                 // Use the original public URL for the reference image so the backend can download it
-                const originalUrl = "https://photos.google.com/album/AF1QipPQ-xyHi8llCQIah0QinW7Jc7Xhv_4nwGb-nJXO/photo/AF1QipOjieNLFeyaSJehvdyCLBp4LLTRTuZJkPqj-exJ";
+                const originalUrl = "https://photos.google.com/share/AF1QipN15_AxTJey_mf95Ssabj4JX2FjiGvdEJ5taoMu0A4NywFtFXOT_yg7EiOiELmZnA/photo/AF1QipPCR78_jRlUC_ehEISR96b-r5kS1h94QsHkoxu8?key=SC14N2ZUUnAydU9pOGJMNkVhUm9ncFlsYzdGVy13";
 
                 const res = await uploadComparison(e.target.files[0], originalUrl);
                 setResult(res);
@@ -47,7 +47,7 @@ const TracingScreen: React.FC<NavProps> = ({ onChangeView }) => {
                 {/* Reference Card */}
                 <section className="bg-white rounded-2xl shadow-sm p-6 flex flex-col items-center justify-center text-center">
                     <div className="w-24 h-24 flex items-center justify-center mb-4">
-                        <img src="https://photos.google.com/album/AF1QipPQ-xyHi8llCQIah0QinW7Jc7Xhv_4nwGb-nJXO/photo/AF1QipOjieNLFeyaSJehvdyCLBp4LLTRTuZJkPqj-exJ" alt="Oracle Bird" className="w-full h-full object-contain" />
+                        <img src="https://photos.google.com/share/AF1QipN15_AxTJey_mf95Ssabj4JX2FjiGvdEJ5taoMu0A4NywFtFXOT_yg7EiOiELmZnA/photo/AF1QipPCR78_jRlUC_ehEISR96b-r5kS1h94QsHkoxu8?key=SC14N2ZUUnAydU9pOGJMNkVhUm9ncFlsYzdGVy13" alt="Oracle Bird" className="w-full h-full object-contain" />
                     </div>
                     <h2 className="text-2xl font-bold text-gray-900">鸟 niǎo</h2>
                     <p className="text-lg font-medium text-gray-500">Bird</p>
@@ -102,7 +102,7 @@ const TracingScreen: React.FC<NavProps> = ({ onChangeView }) => {
 
                         {/* Oracle Bone Char Overlay (The goal) */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-80 mix-blend-multiply">
-                            <img src="https://photos.google.com/album/AF1QipPQ-xyHi8llCQIah0QinW7Jc7Xhv_4nwGb-nJXO/photo/AF1QipOjieNLFeyaSJehvdyCLBp4LLTRTuZJkPqj-exJ" alt="Trace" className="w-3/4 h-3/4 object-contain" />
+                            <img src="https://photos.google.com/share/AF1QipN15_AxTJey_mf95Ssabj4JX2FjiGvdEJ5taoMu0A4NywFtFXOT_yg7EiOiELmZnA/photo/AF1QipPCR78_jRlUC_ehEISR96b-r5kS1h94QsHkoxu8?key=SC14N2ZUUnAydU9pOGJMNkVhUm9ncFlsYzdGVy13" alt="Trace" className="w-3/4 h-3/4 object-contain" />
                         </div>
                     </div>
                 </section>
