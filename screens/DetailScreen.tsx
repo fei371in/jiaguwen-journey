@@ -2,7 +2,12 @@ import React from 'react';
 import { NavProps, View } from '../types';
 import { Icons } from '../components/Icons';
 
+import { useFirstUpload } from '../hooks/useFirstUpload';
+
 const DetailScreen: React.FC<NavProps> = ({ onChangeView }) => {
+   const firstUpload = useFirstUpload();
+   const displayImage = firstUpload || "https://placehold.co/400x400?text=No+Upload";
+
    return (
       <div className="flex-1 flex flex-col bg-white">
          <header className="sticky top-0 bg-white z-50 border-b border-gray-100 px-4 h-14 flex items-center justify-between">
@@ -19,7 +24,7 @@ const DetailScreen: React.FC<NavProps> = ({ onChangeView }) => {
 
             {/* Diagram */}
             <div className="relative w-full max-w-xs aspect-square bg-white border border-gray-100 rounded-2xl mb-8 flex items-center justify-center">
-               <img src="https://photos.google.com/share/AF1QipN15_AxTJey_mf95Ssabj4JX2FjiGvdEJ5taoMu0A4NywFtFXOT_yg7EiOiELmZnA/photo/AF1QipPCR78_jRlUC_ehEISR96b-r5kS1h94QsHkoxu8?key=SC14N2ZUUnAydU9pOGJMNkVhUm9ncFlsYzdGVy13" alt="Bird Oracle" className="w-2/3 h-2/3 object-contain" style={{ transform: 'scaleX(-1)' }} />
+               <img src={displayImage} alt="Bird Oracle" className="w-2/3 h-2/3 object-contain" style={{ transform: 'scaleX(-1)' }} />
 
                {/* Annotations (Simplified positioning for responsive) */}
                <div className="absolute top-10 left-0 text-right">
